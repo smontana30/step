@@ -1,9 +1,164 @@
-#content {
-  margin-left: auto;
-  margin-right: auto;
-  width: 650px;
+*{
+    box-sizing: border-box;
 }
 
-#greeting-container {
-  margin-top: 20px;
+nav {
+    background-color: black;
+    color: white;
+    text-align: center;
+    font-size: 24px;
+    width: 100%;
+    overflow: hidden;
+    position: sticky;
+}
+
+nav span {
+    float: left;
+    padding: 14px 16px;
+    color: white;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 14px 16px;
+    float: right;
+
+}
+
+nav a:hover {
+    /* for underline under anchor text */
+    /* text-decoration: underline;
+    color: white; */
+    background-color: green;
+}
+
+.hero {
+    background-image: url('https://lp-cms-production.imgix.net/2019-06/512d769cd0d5e56c238eb975d2325940-japan.jpeg?fit=crop&q=40&sharp=10&vib=20&auto=format&ixlib=react-8.6.4');
+    padding: 5px;
+    margin: 0;
+    height: 100%;
+    top: 0;
+
+    background-attachment: relative;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.hero-text {
+    text-align: center;
+    position: absolute;
+
+    /* moving text to center of pic */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    color: white;
+    font-size: 30px;
+}
+
+body, html {
+    margin: 0;
+    top: 0;
+    height: 100%;
+    background-color: #c2bfb8;
+    font-family: 'Lato', sans-serif;
+}
+
+#aboutContent {
+    padding: 20px;
+    text-align: center;
+    margin: 0;
+    
+}
+
+#gallery {
+    padding: 20px;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.row {
+    margin: 8px -16px;
+
+}
+
+.row, .row > .column {
+    padding: 8px;
+}
+
+.row:after{
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.column {
+    float: left;
+    width: 25%;
+}
+
+.content {
+    background-color: white;
+    padding: 10px;
+    padding-left: 30px;
+}
+
+#gallery h2 {
+    font-size: 40px;
+    border-bottom: 3px solid black;
+}
+
+#gallery p {
+    font-size: 20px;
+}
+
+img {
+    align-items: center;
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+}
+
+.box {
+    background-color: white;
+    height: 100px;
+    text-align: center;
+}
+
+footer {
+    text-align: center;
+    background-color: black;
+    color: white;
+    padding: 10px;
+
+}
+
+
+
+@media screen and (max-width: 900px) {
+    .column {
+        width: 50%;
+    }
+
+    img {
+        width: 300px;
+        height: 300px;
+        object-fit: cover;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .column {
+        width: 100%;
+    }
+
+    img {
+    width: 400px;
+    height: 300px;
+    object-fit: cover;
+}
+
 }
