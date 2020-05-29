@@ -38,7 +38,7 @@ nav a:hover {
     background-color: green;
 }
 
-.hero {
+.header {
     background-attachment: fixed;
     background-image: url('https://lp-cms-production.imgix.net/2019-06/512d769cd0d5e56c238eb975d2325940-japan.jpeg?fit=crop&q=40&sharp=10&vib=20&auto=format&ixlib=react-8.6.4');
     background-position: center;
@@ -50,7 +50,7 @@ nav a:hover {
     top: 0; 
 }
 
-.hero-text {
+.header-text {
     align-content: center;
     align-items: center;
     align-self: center;
