@@ -16,24 +16,7 @@
  * Adds a random greeting to the page.
  */ 
 
-// document.addEventListener('DOMContentLoaded', () => {
-//     document.querySelector('#changeColor').onclick = function() {
-//         let x = Math.floor(Math.random() * 256);
-//         let y = Math.floor(Math.random() * 256);
-//         let z = Math.floor(Math.random() * 256);
-//         let rgb = "rgb(" + x + "," + y + "," + z + ")";
-//         console.log(rgb);
-
-//         document.body.style.background = rgb;
-//     }
-// });
-
 function changeColor() { 
-    // let randHexCode = Math.floor( Math.random() * 16777215).toString(16);
-    // let newColor = "#" + randHexCode;
-    // document.getElementById('box').style.backgroundColor = newColor;
-    // document.getElementById('box').style.background = newColor;
-
     let x = Math.floor(Math.random() * 256);
     let y = Math.floor(Math.random() * 256);
     let z = Math.floor(Math.random() * 256);
