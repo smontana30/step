@@ -16,11 +16,17 @@
  * Adds a random greeting to the page.
  */ 
 
-function changeColor() { 
-    let x = Math.floor(Math.random() * 256);
-    let y = Math.floor(Math.random() * 256);
-    let z = Math.floor(Math.random() * 256);
-    let rgb = "rgb(" + x + "," + y + "," + z + ")";
-    document.getElementById('box').style.backgroundColor = rgb;
-    document.getElementById('color').innerHTML = rgb;
+// function changeColor() { 
+//     let x = Math.floor(Math.random() * 256);
+//     let y = Math.floor(Math.random() * 256);
+//     let z = Math.floor(Math.random() * 256);
+//     let rgb = "rgb(" + x + "," + y + "," + z + ")";
+//     document.getElementById('box').style.backgroundColor = rgb;
+//     document.getElementById('color').innerHTML = rgb;
+// }
+
+async function getFetchRequest() {
+    const response = await fetch('/data');
+    const text = await response.text();
+    document.getElementById('fetch-text').innerText = text;
 }
