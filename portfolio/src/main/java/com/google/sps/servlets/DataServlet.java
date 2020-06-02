@@ -19,6 +19,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.List;
+import com.google.gson.Gson;
+
 
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
@@ -26,7 +30,36 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    response.setContentType("text/html;");
-    response.getWriter().println("<h1>Hello Sofia</h1>");
+    // response.setContentType("text/html;");
+    // response.getWriter().println("<h1>Hello Sofia</h1>");
+    ArrayList<String> array = new ArrayList<String>();
+    array.add("Bogota");
+    array.add("Miami");
+    array.add("Atlanta");
+    String json = convertToJson(array);
+
+    response.setContentType("application/json;");
+    response.getWriter().println(json);
   }
+
+  private String convertToJson(ArrayList array) {
+      String json = "{";
+      json += "\"text1\": ";
+      json += "\"" + array.get(0) + "\"";
+      json += ", ";
+      json += "\"text2\": ";
+      json += "\"" + array.get(1) + "\"";
+      json += ", ";
+      json += "\"text3\": ";
+      json += "\"" + array.get(2) + "\""; 
+      json += "}";
+
+      return json;
+  }
+
+    private String convertToJsonUsingGson(ArrayList array) {
+        Gson gson = new Gson();
+        String json = gson.toJson(array);
+        return json;
+    }
 }

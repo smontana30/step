@@ -25,8 +25,30 @@
 //     document.getElementById('color').innerHTML = rgb;
 // }
 
-async function getFetchRequest() {
-    const response = await fetch('/data');
-    const text = await response.text();
-    document.getElementById('fetch-text').innerText = text;
+// @Webservlet tells what '/' to put in fetch look at DataServlet.java
+
+// async function getFetchRequest() {
+//     const response = await fetch('/data');
+//     const text = await response.text();
+//     document.getElementById('fetch-text').innerText = text;
+// }
+
+function getArrayMessages() {
+    fetch('/data').then(response => response.json()).then((messages) => {
+    console.log(messages);
+    const textId = document.getElementById('fetch-text');
+    textId.innerHTML = '';
+    textId.appendChild(
+        createListElement('text1: ' + messages.text1));
+    textId.appendChild(
+        createListElement('text2: ' + messages.text2));
+    textId.appendChild(
+        createListElement('text3: ' + messages.text3));
+    });
+}
+
+function createListElement(message) {
+        const liElement = document.createElement('li');
+        liElement.innerText = message;
+        return liElement;
 }
