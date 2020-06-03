@@ -11,164 +11,6 @@
     <script src="script.js"></script>
   </head>
   <body>
-      <!--
-        <nav> 
-            <span>Navbar</span>
-            <a href="#about-content">About</a>
-            <a href="#gallery">Gallery</a>
-            <a href="#box">Color Picker</a>
-        </nav>
-
-    <div class="header"> 
-        <div class="header-text"> 
-            <h1>Sofia Montana</h1>
-        </div>
-    </div>
-
-    <div id="about-content"> 
-        <h2>About Me... </h2>
-        <p> 
-            Hello, I am Sofia Montana De Bedout, I am twenty year old 
-            university student from Miami, Florida. I really like Computer Science and 
-            am really excited to learn more about this field. My family and I are orginally 
-            from Bogota, Colombia and I am fully bilingual in Spanish and English. I love 
-            playing video games, watching Netflix and playing sports. Also, I am quite the Math 
-            nerd I love Math and have a job tutoring students in Math at my university.
-        </p>
-    </div>
-
-    place the cool image hover effect of each (for each)
-    <div id="gallery">
-        <h2> Fun Fact Gallery </h2>
-        <p> 
-            Every single picture in this gallery
-            represent a little fun fact about myself.
-        </p>
-        <div class="row"> 
-            image on Colombia
-            <div class="column"> 
-                <div class="content"> 
-                    <img src="https://media.nomadicmatt.com/colombiaguide.jpg" 
-                        alt="Colombia" >
-                    <h3>Colombia</h3>
-                    <p>
-                        My family and I are originally from Colombia.
-                        Whenever I go to Colombia, I always have 
-                        a lot of fun and I am always sad to return home.
-                        Vamos Colombia! 
-                    </p>
-                </div>
-            </div>
-
-            image on videos games
-            <div class="column"> 
-                <div class="content"> 
-                    <img src="https://image-cdn.essentiallysports.com/wp-content/uploads/20200427185830/the-last-of-us-part-2-release-date.jpg" 
-                        alt="The Last of Us Part II" >
-                    <h3>Video Games</h3>
-                    <p>
-                        I love video games and I have loved them since
-                        I was kid. Some of my favorite 
-                        games are "The Last of Us Part I", "Witcher 3", 
-                        "Persona 5", "Bloodborne", and "Fifa".
-                    </p>
-                </div>
-            </div>
-
-            image about the cats
-            <div class="column"> 
-                <div class="content"> 
-                    <img src="images/gatos.jpeg" alt="My cats" >
-                    <h3>Felix and Blu</h3>
-                    <p>
-                        Felix and Blu are my two cats. Felix is very social and loves 
-                        people and attention. While Blu is very
-                        shy and does not really like strangers.
-                    </p>
-                </div>
-            </div>
-
-            image about twins talk being a twin
-            <div class="column"> 
-                <div class="content"> 
-                    <img src="images/Twins.jpeg" alt="My twin sister and I">
-                    <h3>Being a Twin</h3>
-                    <p> 
-                        My twin and I are best friends. Even though 
-                        we are polar opposites. While my sister is very creative,
-                        I am very science based.
-                    </p>
-                </div>
-            </div>
-
-            image on Miami where i grew up
-            <div class="column"> 
-                <div class="content"> 
-                    <img src="https://blog-www.pods.com/wp-content/uploads/2019/08/MG_6_1_Miami.jpg" 
-                        alt="City of Miami" >
-                    <h3>Miami</h3>
-                    <p>
-                        Miami is place were I was raised. It is melting pot of 
-                        different cultures. One of my favorite things about Miami
-                        is the heavy Cuban influence. I love being from here.  
-                    </p>
-                </div>
-            </div>
-
-            image on bad bunny my fav artist 
-            <div class="column"> 
-                <div class="content"> 
-                    <img src="https://cdn3.pitchfork.com/longform/976/badbunnyheader.jpg" 
-                        alt="bad bunny" >
-                    <h3>Bad Bunny</h3>
-                    <p>
-                        Bad Bunny is my all time favorite music artist.
-                        Bad Bunny is huge in the Latino community and I love
-                        his music and videos. Also, I went to his last concert 
-                        in Miami. It was insane, he was so good live 10/10
-                        recommend. 
-                    </p>
-                </div>
-            </div>
-
-            <div class="column"> 
-                <div class="content"> 
-                    <img src="https://static.iris.net.co/semana/upload/images/2018/6/1/569673_1.jpg" 
-                        alt="Colombian Soccer Team" >
-                    <h3>Soccer(Futbol)</h3>
-                    <p>
-                        I love soccer and have loved it all my life.
-                        Growing up my family and I would watch soccer matches
-                        on the tv a lot. We always host watch parties during the Fifa World Cup
-                        to watch Colombia games. It is a lot of fun. Let's go 
-                        Colombia!
-                    </p>
-                </div>
-            </div>
-
-            <div class="column"> 
-                <div class="content"> 
-                    <img src="images/shpe.png" alt="The Society of Professional Hispanic Engineers" >
-                    <h3>Shpe</h3>
-                    <p>
-                        Shpe is the acroymn for The Society of Professional
-                        Hispanic Engineers. I have made so many friends and 
-                        contacts through the club. In our club, we 
-                        have a saying which is "Somos Familia", that means we are family and
-                        it is true.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div id="box" > 
-        <div id="color"></div>
-        <button onclick="changeColor()" >
-           Click To Change Color 
-        </button>
-    </div>
-    -->
     <div class="fetch">
         <p>Click <a href="/data">here</a> to view content generated by a servlet.</p>
         <button onclick="getArrayMessages()">
@@ -176,6 +18,18 @@
         </button>
         <div ></div>
         <ul id="fetch-text"></ul>
+
+        <form action="/data" method="POST">
+            <p>Who are you favorite super-heros and why?</p>
+            <textarea name="text-input">
+                Spiderman becasue I loved 
+                watching his movies when I was little. 
+            </textarea>
+            <br/>
+
+
+            <input type="submit" title="Post"/>
+        </form>
     </div>
 
     <!-- <footer> 

@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import com.google.gson.Gson;
 
@@ -41,6 +42,37 @@ public class DataServlet extends HttpServlet {
     response.setContentType("application/json;");
     response.getWriter().println(json);
   }
+
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+      String inputVal = request.getParameter("text-input");
+      String text;
+      ArrayList<String> comments = new ArrayList<>();
+      if (inputVal == null)
+      {
+          // text-input empty
+          text = "";
+      }
+      text = inputVal;
+      comments.add(text);
+    //   String totComments[] = getAllComments(comments);
+    for(int i = 0; i < comments.size(); i++) {
+       response.setContentType("text/html;");
+      response.getWriter().println(comments.get(i));
+    }
+    //   response.setContentType("text/html;");
+    //   response.getWriter().println(comments);
+
+  }
+
+//   public String getAllComments(ArrayList comments) {
+//       int size = comments.size();
+
+//       for(int i = 0; i < size; i++) {
+//           getComments[i] = comments[i];
+//       }
+//       return getComments;
+//   }
 
   private String convertToJson(ArrayList array) {
       String json = "{";
