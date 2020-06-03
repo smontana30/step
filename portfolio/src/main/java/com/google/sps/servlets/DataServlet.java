@@ -14,6 +14,9 @@
 
 package com.google.sps.servlets;
 
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -45,34 +48,16 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-      String inputVal = request.getParameter("text-input");
-      String text;
+      String text = request.getParameter("text-input");
       ArrayList<String> comments = new ArrayList<>();
-      if (inputVal == null)
-      {
-          // text-input empty
-          text = "";
-      }
-      text = inputVal;
-      comments.add(text);
-    //   String totComments[] = getAllComments(comments);
-    for(int i = 0; i < comments.size(); i++) {
-       response.setContentType("text/html;");
-      response.getWriter().println(comments.get(i));
-    }
-    //   response.setContentType("text/html;");
-    //   response.getWriter().println(comments);
+      Entity taskEntity = new Entity("Task");
+      taskEntity.setProperty("text-input", text);
+
+      DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+      datastore.put(taskEntity);
+      response.sendRedirect("/index.html");
 
   }
-
-//   public String getAllComments(ArrayList comments) {
-//       int size = comments.size();
-
-//       for(int i = 0; i < size; i++) {
-//           getComments[i] = comments[i];
-//       }
-//       return getComments;
-//   }
 
   private String convertToJson(ArrayList array) {
       String json = "{";
