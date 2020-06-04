@@ -26,9 +26,7 @@
 function loadComments() {
     fetch('/data').then(response => response.json()).then((comments) => {
     const commentListElement = document.getElementById('comment-list');
-    console.log(comments);
     comments.forEach((comment) => { 
-        console.log(comment);
         commentListElement.appendChild(createListElement(comment));
     })
     });
@@ -41,6 +39,20 @@ function createListElement(comment) {
         const titleElement = document.createElement('span');
         titleElement.innerText = comment.title;
         
+        const deleteButton = document.createElement('button');
+        deleteButton.innerText = 'Delete';
+        deleteButton.addEventListener('click', () => {
+            deleteComment(comment);
+            commentElement.remove();
+        });
+
         commentElement.appendChild(titleElement);
+        commentElement.appendChild(deleteButton);
         return commentElement;
+}
+
+function deleteComment(comment) {
+    const params = new URLSearchParams();
+    params.append('id', comment.id);
+    fetch('/delete-comment', {method: 'POST', body: params});
 }

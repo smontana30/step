@@ -28,6 +28,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.Arrays;
+import static java.util.Arrays.*;
 import java.util.List;
 import com.google.gson.Gson;
 
@@ -53,8 +54,10 @@ public class DataServlet extends HttpServlet {
     Query query = new Query("Task").addSort("timestamp", SortDirection.DESCENDING);
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
-
+    // String num = request.getParameter("number");
+    // int number = Integer.parseInt(num);
     List<Task> comments = new ArrayList<>();
+    List<Task> limitedComments = new ArrayList<>();
     for (Entity entity : results.asIterable()) {
       long id = entity.getKey().getId();
       String title = (String) entity.getProperty("title");
@@ -62,6 +65,10 @@ public class DataServlet extends HttpServlet {
 
       Task user = new Task(id, title, timestamp);
       comments.add(user);
+    //   count++;
+    //   if (count == number) {
+    //       break;
+    //   }
     }
 
     Gson gson = new Gson();
