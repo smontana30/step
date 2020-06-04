@@ -14,9 +14,13 @@
 
 package com.google.sps.servlets;
 
+import com.google.sps.data.UserInfo;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.SortDirection;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,6 +31,18 @@ import java.util.Arrays;
 import java.util.List;
 import com.google.gson.Gson;
 
+final class Task {
+
+  private final long id;
+  private final String title;
+  private final long timestamp;
+
+  public Task(long id, String title, long timestamp) {
+    this.id = id;
+    this.title = title;
+    this.timestamp = timestamp;
+  }
+}
 
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
@@ -34,49 +50,37 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    // response.setContentType("text/html;");
-    // response.getWriter().println("<h1>Hello Sofia</h1>");
-    ArrayList<String> array = new ArrayList<String>();
-    array.add("Bogota");
-    array.add("Miami");
-    array.add("Atlanta");
-    String json = convertToJson(array);
+    Query query = new Query("Task").addSort("timestamp", SortDirection.DESCENDING);
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    PreparedQuery results = datastore.prepare(query);
+
+    List<Task> comments = new ArrayList<>();
+    for (Entity entity : results.asIterable()) {
+      long id = entity.getKey().getId();
+      String title = (String) entity.getProperty("title");
+      long timestamp = (long) entity.getProperty("timestamp");
+
+      Task user = new Task(id, title, timestamp);
+      comments.add(user);
+    }
+
+    Gson gson = new Gson();
 
     response.setContentType("application/json;");
-    response.getWriter().println(json);
+    response.getWriter().println(gson.toJson(comments));
   }
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-      String text = request.getParameter("text-input");
-      ArrayList<String> comments = new ArrayList<>();
+      String title = request.getParameter("title");
+      long timestamp = System.currentTimeMillis();
       Entity taskEntity = new Entity("Task");
-      taskEntity.setProperty("text-input", text);
+      taskEntity.setProperty("title", title);
+      taskEntity.setProperty("timestamp", timestamp);
 
       DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
       datastore.put(taskEntity);
+
       response.sendRedirect("/index.html");
-
   }
-
-  private String convertToJson(ArrayList array) {
-      String json = "{";
-      json += "\"text1\": ";
-      json += "\"" + array.get(0) + "\"";
-      json += ", ";
-      json += "\"text2\": ";
-      json += "\"" + array.get(1) + "\"";
-      json += ", ";
-      json += "\"text3\": ";
-      json += "\"" + array.get(2) + "\""; 
-      json += "}";
-
-      return json;
-  }
-
-    private String convertToJsonUsingGson(ArrayList array) {
-        Gson gson = new Gson();
-        String json = gson.toJson(array);
-        return json;
-    }
 }
