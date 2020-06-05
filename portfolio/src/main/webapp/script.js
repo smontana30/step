@@ -12,6 +12,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+function changeColor() { 
+    let x = Math.floor(Math.random() * 256);
+    let y = Math.floor(Math.random() * 256);
+    let z = Math.floor(Math.random() * 256);
+    let rgb = "rgb(" + x + "," + y + "," + z + ")";
+    document.getElementById('box').style.backgroundColor = rgb;
+    document.getElementById('color').innerHTML = rgb;
+}
+
 function loadComments() {
     fetch('/data').then(response => response.json()).then((comments) => {
     const commentListElement = document.getElementById('comment-list');
@@ -26,6 +35,9 @@ function createListElement(comment) {
     commentElement.className = 'comment';
     commentElement.id = comment.id;
 
+    const nameElement = document.createElement('h3');
+    nameElement.innerText = comment.name + ":";
+
     const titleElement = document.createElement('span');
     titleElement.innerText = comment.title;
         
@@ -36,6 +48,7 @@ function createListElement(comment) {
         commentElement.remove();
     });
 
+    commentElement.appendChild(nameElement);
     commentElement.appendChild(titleElement);
     commentElement.appendChild(deleteButton);
     return commentElement;

@@ -37,11 +37,13 @@ final class Task {
   private final long id;
   private final String title;
   private final long timestamp;
+  private final String name;
 
-  public Task(long id, String title, long timestamp) {
+  public Task(long id, String title, long timestamp, String name) {
     this.id = id;
     this.title = title;
     this.timestamp = timestamp;
+    this.name = name;
   }
 }
 
@@ -59,8 +61,9 @@ public class DataServlet extends HttpServlet {
       long id = entity.getKey().getId();
       String title = (String) entity.getProperty("title");
       long timestamp = (long) entity.getProperty("timestamp");
+      String name = (String) entity.getProperty("name");
 
-      Task user = new Task(id, title, timestamp);
+      Task user = new Task(id, title, timestamp,name);
       comments.add(user);
       
     }
@@ -73,9 +76,14 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
       String title = request.getParameter("title");
+      String name = request.getParameter("name");
+      if (name == "") {
+          name = "Unknown";
+      }
       long timestamp = System.currentTimeMillis();
       Entity taskEntity = new Entity("Task");
       taskEntity.setProperty("title", title);
+      taskEntity.setProperty("name", name);
       taskEntity.setProperty("timestamp", timestamp);
 
       DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();

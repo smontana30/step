@@ -11,7 +11,108 @@
     <script src="script.js"></script>
   </head>
   <body onload="loadComments()">
-      <h1>Comments</h1>
+    <nav> 
+        <span>Navbar</span>
+        <a href="#about-content">About</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#box">Color Picker</a>
+        <a href="#Comment">Comments</a>
+    </nav>
+
+    <div class="header"> 
+        <div class="header-text"> 
+            <h1>Sofia Montana</h1>
+        </div>
+    </div>
+
+    <div id="about-content"> 
+        <h2>About Me... </h2>
+        <p> 
+            Hello, I am Sofia Montana De Bedout, I am twenty year old 
+            university student from Miami, Florida. I really like Computer Science and 
+            am really excited to learn more about this field. My family and I are orginally 
+            from Bogota, Colombia and I am fully bilingual in Spanish and English. I love 
+            playing video games, watching Netflix and playing sports. Also, I am quite the Math 
+            nerd I love Math and have a job tutoring students in Math at my university.
+        </p>
+    </div>
+
+    <!-- place the cool image hover effect of each (for each) -->
+    <div id="gallery">
+        <h2> Fun Fact Gallery </h2>
+        <p> 
+            Every single picture in this gallery
+            represent a little fun fact about myself.
+        </p>
+        <div class="row"> 
+            <!-- image about the cats -->
+            <div class="column"> 
+                <div class="content"> 
+                    <img src="images/gatos.jpeg" alt="My cats" >
+                    <h3>Felix and Blu</h3>
+                    <p>
+                        Felix and Blu are my two cats. Felix is very social and loves 
+                        people and attention. While Blu is very
+                        shy and does not really like strangers.
+                    </p>
+                </div>
+            </div>
+
+            <!-- image about twins talk being a twin -->
+            <div class="column"> 
+                <div class="content"> 
+                    <img src="images/Twins.jpeg" alt="My twin sister and I">
+                    <h3>Being a Twin</h3>
+                    <p> 
+                        My twin and I are best friends. Even though 
+                        we are polar opposites. While my sister is very creative,
+                        I am very science based.
+                    </p>
+                </div>
+            </div>
+
+            <!-- image on bad bunny my fav artist  -->
+            <div class="column"> 
+                <div class="content"> 
+                    <img src="https://cdn3.pitchfork.com/longform/976/badbunnyheader.jpg" 
+                        alt="bad bunny" >
+                    <h3>Bad Bunny</h3>
+                    <p>
+                        Bad Bunny is my all time favorite music artist.
+                        Bad Bunny is huge in the Latino community and I love
+                        his music and videos. Also, I went to his last concert 
+                        in Miami. It was insane, he was so good live 10/10
+                        recommend. 
+                    </p>
+                </div>
+            </div>
+
+            <div class="column"> 
+                <div class="content"> 
+                    <img src="https://static.iris.net.co/semana/upload/images/2018/6/1/569673_1.jpg" 
+                        alt="Colombian Soccer Team" >
+                    <h3>Soccer(Futbol)</h3>
+                    <p>
+                        I love soccer and have loved it all my life.
+                        Growing up my family and I would watch soccer matches
+                        on the tv a lot. We always host watch parties during the Fifa World Cup
+                        to watch Colombia games. It is a lot of fun. Let's go 
+                        Colombia!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="box" > 
+        <div id="color"></div>
+        <button onclick="changeColor()" >
+           Click To Change Color 
+        </button>
+    </div>
+
+    <div class="comment-container">
+      <h1 id="Comment">Comments</h1>
       <form method="POST" action="/data">
         <label for="numbers">Choose the number of Comments displayed</label>
         <!-- onchange will change whenever there is a change in the value -->
@@ -27,7 +128,10 @@
       </form>
 
       <form method="POST" action="/data">
-      <input type="text" name="title" />
+      <h3>Name:</h3>
+      <input type="text" name="name" placeholder="type your name"/>
+      <h3>Comment:</h3>
+      <input type="text" name="title" placeholder="type your comments"/>
       <br/>
       <button>Submit</button>
       </form>
@@ -35,5 +139,6 @@
       <button id="delete-all" onclick="deleteAll()">Delete All</button>
       <hr/>
       <ul id="comment-list"></ul>
+    </div>
   </body>
 </html>
