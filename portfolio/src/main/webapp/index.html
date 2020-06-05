@@ -13,14 +13,27 @@
   <body onload="loadComments()">
       <h1>Comments</h1>
       <form method="POST" action="/data">
-      
+        <label for="numbers">Choose the number of Comments displayed</label>
+            <select name="num" id="num" onclick="loadUpdatedComments()">
+                <option value="3">3</option>
+                <option value="5">5</option>
+                <option value="8">8</option>
+                <option value="10">10</option>
+            </select>
+      </form>
+
+      <form method="POST" action="/data">
       <input type="text" name="title" />
       <br/>
       <button>Submit</button>
       </form>
-
+      <br/>
+      <button id="delete-all" onclick="deleteAll()">Delete All</button>
       <hr/>
+      <div id="delete-all-area"></div>
+      <br/>
       <ul id="comment-list"></ul>
 
+      
   </body>
 </html>
