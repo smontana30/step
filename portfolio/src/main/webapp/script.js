@@ -12,85 +12,59 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/**
- * Adds a random greeting to the page.
- */ 
-
-// async function getFetchRequest() {
-//     const response = await fetch('/data');
-//     const text = await response.text();
-//     document.getElementById('fetch-text').innerText = text;
-// }
-
-
 function loadComments() {
     fetch('/data').then(response => response.json()).then((comments) => {
     const commentListElement = document.getElementById('comment-list');
-    const deleteAllButton = document.createElement('button');
-    const deleteAllArea = document.getElementById('delete-all-area');
     comments.forEach((comment) => { 
         commentListElement.appendChild(createListElement(comment));
-
     })
-    let commentLi = document.getElementsByClassName('comment');
-    deleteAllArea.appendChild(deleteAllButton);
-    deleteAllButton.addEventListener('click', () => {
-        comments.forEach((comment) => {
-            deleteComment(comment);
-            commentLi.remove();
-        })
-    });
-
     });
 }
 
 function createListElement(comment) {
-        const commentElement = document.createElement('li');
-        commentElement.className = 'comment';
+    const commentElement = document.createElement('li');
+    commentElement.className = 'comment';
+    commentElement.id = comment.id;
 
-        const titleElement = document.createElement('span');
-        titleElement.innerText = comment.title;
+    const titleElement = document.createElement('span');
+    titleElement.innerText = comment.title;
         
-        const deleteButton = document.createElement('button');
-        deleteButton.innerText = 'Delete';
-        deleteButton.addEventListener('click', () => {
-            deleteComment(comment);
-            commentElement.remove();
-        });
+    const deleteButton = document.createElement('button');
+    deleteButton.innerText = 'Delete';
+    deleteButton.addEventListener('click', () => {
+        deleteComment(comment.id);
+        commentElement.remove();
+    });
 
-        commentElement.appendChild(titleElement);
-        commentElement.appendChild(deleteButton);
-        return commentElement;
+    commentElement.appendChild(titleElement);
+    commentElement.appendChild(deleteButton);
+    return commentElement;
 }
  function loadUpdatedComments() {
-     fetch('/data').then(response => response.json()).then((comments) => {
+    const commentsId = document.getElementById('comment-list');
+    commentsId.innerHTML = "";
+    fetch('/data').then(response => response.json()).then((comments) => {
     const commentListElement = document.getElementById('comment-list');
     let numberComment = document.getElementById('num').value;
-    console.log("number of comments shown is " + numberComment);
     for (let i = 0; i < numberComment; i++) {
         commentListElement.appendChild(createListElement(comments[i]));
-        console.log(comments[i])
     }
     });
  }
 
  function deleteAll() {
-     let comments = document.querySelectorAll("comment");
-     console.log(comments);
-     console.log("before for loop");
-     //loops to delete every comment
-     for (let i = 0; i < comments.length; i++) {
-         console.log("in for loop");
-         console.log(comments[i]);
-        //comments.parentNode.removeChild(comments[i]);
-        deleteComment(comments[i]);
+    let comments = document.querySelectorAll(".comment");
+    //loops to delete every comment 
+    for (let i = 0; i < comments.length; i++) {
+        // pass comment id to delete not whole comment
+        deleteComment(comments[i].id);
         comments[i].remove();
-     }
-     
+    }
  }
 
-function deleteComment(comment) {
+// use the comments id to delete it
+function deleteComment(id) {
     const params = new URLSearchParams();
-    params.append('id', comment.id);
+    params.append('id', id);
     fetch('/delete-comment', {method: 'POST', body: params});
 }

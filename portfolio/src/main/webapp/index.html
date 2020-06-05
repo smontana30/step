@@ -14,11 +14,15 @@
       <h1>Comments</h1>
       <form method="POST" action="/data">
         <label for="numbers">Choose the number of Comments displayed</label>
-            <select name="num" id="num" onclick="loadUpdatedComments()">
+        <!-- onchange will change whenever there is a change in the value -->
+            <select name="num" id="num" onchange="loadUpdatedComments()">
+                <option value="1">1</option>
                 <option value="3">3</option>
                 <option value="5">5</option>
                 <option value="8">8</option>
                 <option value="10">10</option>
+                <option value="12">12</option>
+                <option value="14">14</option>
             </select>
       </form>
 
@@ -30,10 +34,6 @@
       <br/>
       <button id="delete-all" onclick="deleteAll()">Delete All</button>
       <hr/>
-      <div id="delete-all-area"></div>
-      <br/>
       <ul id="comment-list"></ul>
-
-      
   </body>
 </html>
