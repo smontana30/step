@@ -3,19 +3,20 @@ html {
     background-color: #c2bfb8;
     font-family: 'Lato', sans-serif;
     height: 100%;
-    top: 0;
     margin: 0;
+    top: 0;
 }
 
 .comment {
-    border: 1px solid black;
-    padding: 5px;
+    
     align-items: center;
-    width: auto;
-    font-size: 16px;
-    display: flex;
-    justify-content: space-around;
     background-color: white;
+    border: 1px solid black;
+    display: flex;
+    font-size: 16px;
+    justify-content: space-around;
+    padding: 5px;
+    width: auto; 
 }
 
 #comment-list {
@@ -27,13 +28,21 @@ html {
 }
 
 .comment button {
-    padding: 5px;
+    justify-content: flex-end; 
     margin-left: auto;
-    justify-content: flex-end;  
+    padding: 5px;
 }
 
-.comment-container {
+#comment-container {
     margin: 15px;
+}
+
+form input {
+    margin-bottom: 12px;
+}
+
+form {
+    margin-bottom: 16px;
 }
 
 nav {
@@ -45,24 +54,26 @@ nav {
     font-size: 24px;
     overflow: hidden;
     text-align: center;
-    width: 100%;
     top: 0;
+    width: 100%;
+    
 }
 
 nav span {
     align-content: flex-start;
     align-items: flex-start;
     align-self: flex-start;
-    padding: 14px 16px;
     color: white;
+    padding: 14px 16px;
+    
 }
 
 nav a {
     align-content: flex-end;
     align-items: flex-end;
     align-self: flex-end;
-    justify-content: flex-end;
     color: white;
+    justify-content: flex-end;
     padding: 14px 16px;
     text-decoration: none;
 }
@@ -159,19 +170,20 @@ img {
     align-items: center;
     align-content: center;
     background-color: white;
-    height: 100px;
-    text-align: center;
     display: block;
+    height: 100px;
     justify-content: center;
-    width: 50%;
     margin: 20px;
+    text-align: center;
+    width: 50%;
+   
 }
 
 .box button {
-    text-align: center;
     align-items: center;
     justify-content: center;
     margin: 20px; 
+    text-align: center;
 }
 
 footer {

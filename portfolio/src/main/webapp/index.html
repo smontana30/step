@@ -16,7 +16,7 @@
         <a href="#about-content">About</a>
         <a href="#gallery">Gallery</a>
         <a href="#box">Color Picker</a>
-        <a href="#Comment">Comments</a>
+        <a href="#comments">Comments</a>
     </nav>
 
     <div class="header"> 
@@ -111,8 +111,8 @@
         </button>
     </div>
 
-    <div class="comment-container">
-      <h1 id="Comment">Comments</h1>
+    <div id="comment-container">
+      <h1 id="comments">Comments</h1>
       <form method="POST" action="/data">
         <label for="numbers">Choose the number of Comments displayed</label>
         <!-- onchange will change whenever there is a change in the value -->
@@ -128,16 +128,16 @@
       </form>
 
       <form method="POST" action="/data">
-      <h3>Name:</h3>
-      <input type="text" name="name" placeholder="type your name"/>
-      <h3>Comment:</h3>
-      <input type="text" name="title" placeholder="type your comments"/>
-      <br/>
-      <button>Submit</button>
+        <h3>Name:</h3>
+        <input type="text" name="name" placeholder="type your name">
+        <h3>Comment:</h3>
+        <input type="text" name="title" placeholder="type your comments">
+        <br>
+        <button>Submit</button>
       </form>
-      <br/>
+      <br>
       <button id="delete-all" onclick="deleteAll()">Delete All</button>
-      <hr/>
+      <hr>
       <ul id="comment-list"></ul>
     </div>
   </body>

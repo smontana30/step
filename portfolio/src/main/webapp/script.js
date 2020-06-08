@@ -23,10 +23,10 @@ function changeColor() {
 
 function loadComments() {
     fetch('/data').then(response => response.json()).then((comments) => {
-    const commentListElement = document.getElementById('comment-list');
-    comments.forEach((comment) => { 
-        commentListElement.appendChild(createListElement(comment));
-    })
+        const commentListElement = document.getElementById('comment-list');
+        comments.forEach((comment) => { 
+            commentListElement.appendChild(createListElement(comment));
+        });
     });
 }
 
@@ -36,7 +36,7 @@ function createListElement(comment) {
     commentElement.id = comment.id;
 
     const nameElement = document.createElement('h3');
-    nameElement.innerText = comment.name + ":";
+    nameElement.innerText = comment.name + ':';
 
     const titleElement = document.createElement('span');
     titleElement.innerText = comment.title;
@@ -53,27 +53,28 @@ function createListElement(comment) {
     commentElement.appendChild(deleteButton);
     return commentElement;
 }
- function loadUpdatedComments() {
-    const commentsId = document.getElementById('comment-list');
-    commentsId.innerHTML = "";
-    fetch('/data').then(response => response.json()).then((comments) => {
-    const commentListElement = document.getElementById('comment-list');
-    let numberComment = document.getElementById('num').value;
-    for (let i = 0; i < numberComment; i++) {
-        commentListElement.appendChild(createListElement(comments[i]));
-    }
-    });
- }
 
- function deleteAll() {
-    let comments = document.querySelectorAll(".comment");
+function loadUpdatedComments() {
+    const commentsId = document.getElementById('comment-list');
+    commentsId.innerHTML = '';
+    fetch('/data').then(response => response.json()).then((comments) => {
+        const commentListElement = document.getElementById('comment-list');
+        let numberComment = document.getElementById('num').value;
+        for (let i = 0; i < numberComment; i++) {
+            commentListElement.appendChild(createListElement(comments[i]));
+        }
+    });
+}
+
+function deleteAll() {
+    let comments = document.querySelectorAll('.comment');
     //loops to delete every comment 
     for (let i = 0; i < comments.length; i++) {
         // pass comment id to delete not whole comment
         deleteComment(comments[i].id);
         comments[i].remove();
     }
- }
+}
 
 // use the comments id to delete it
 function deleteComment(id) {
