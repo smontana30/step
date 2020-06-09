@@ -56,7 +56,6 @@ nav {
     text-align: center;
     top: 0;
     width: 100%;
-    
 }
 
 nav span {
@@ -65,7 +64,6 @@ nav span {
     align-self: flex-start;
     color: white;
     padding: 14px 16px;
-    
 }
 
 nav a {
