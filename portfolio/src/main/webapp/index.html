@@ -10,13 +10,15 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
   </head>
-  <body>
-        <nav> 
-            <span>Navbar</span>
-            <a href="#about-content">About</a>
-            <a href="#gallery">Gallery</a>
-            <a href="#box">Color Picker</a>
-        </nav>
+  <body onload="loadComments()">
+    <nav> 
+        <span>Navbar</span>
+        <a href="#about-content">About</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#box">Color Picker</a>
+        <a href="#comments">Comments</a>
+        <a href="login.html">Login</a>
+    </nav>
 
     <div class="header"> 
         <div class="header-text"> 
@@ -44,36 +46,6 @@
             represent a little fun fact about myself.
         </p>
         <div class="row"> 
-            <!-- image on Colombia -->
-            <div class="column"> 
-                <div class="content"> 
-                    <img src="https://media.nomadicmatt.com/colombiaguide.jpg" 
-                        alt="Colombia" >
-                    <h3>Colombia</h3>
-                    <p>
-                        My family and I are originally from Colombia.
-                        Whenever I go to Colombia, I always have 
-                        a lot of fun and I am always sad to return home.
-                        Vamos Colombia! 
-                    </p>
-                </div>
-            </div>
-
-            <!-- image on videos games -->
-            <div class="column"> 
-                <div class="content"> 
-                    <img src="https://image-cdn.essentiallysports.com/wp-content/uploads/20200427185830/the-last-of-us-part-2-release-date.jpg" 
-                        alt="The Last of Us Part II" >
-                    <h3>Video Games</h3>
-                    <p>
-                        I love video games and I have loved them since
-                        I was kid. Some of my favorite 
-                        games are "The Last of Us Part I", "Witcher 3", 
-                        "Persona 5", "Bloodborne", and "Fifa".
-                    </p>
-                </div>
-            </div>
-
             <!-- image about the cats -->
             <div class="column"> 
                 <div class="content"> 
@@ -96,20 +68,6 @@
                         My twin and I are best friends. Even though 
                         we are polar opposites. While my sister is very creative,
                         I am very science based.
-                    </p>
-                </div>
-            </div>
-
-            <!-- image on Miami where i grew up -->
-            <div class="column"> 
-                <div class="content"> 
-                    <img src="https://blog-www.pods.com/wp-content/uploads/2019/08/MG_6_1_Miami.jpg" 
-                        alt="City of Miami" >
-                    <h3>Miami</h3>
-                    <p>
-                        Miami is place were I was raised. It is melting pot of 
-                        different cultures. One of my favorite things about Miami
-                        is the heavy Cuban influence. I love being from here.  
                     </p>
                 </div>
             </div>
@@ -144,20 +102,6 @@
                     </p>
                 </div>
             </div>
-
-            <div class="column"> 
-                <div class="content"> 
-                    <img src="images/shpe.png" alt="The Society of Professional Hispanic Engineers" >
-                    <h3>Shpe</h3>
-                    <p>
-                        Shpe is the acroymn for The Society of Professional
-                        Hispanic Engineers. I have made so many friends and 
-                        contacts through the club. In our club, we 
-                        have a saying which is "Somos Familia", that means we are family and
-                        it is true.
-                    </p>
-                </div>
-            </div>
         </div>
     </div>
     
@@ -168,11 +112,31 @@
         </button>
     </div>
 
-    <footer> 
-        <h5>
-            Copyright of Sofi
-        </h5>
-    </footer>
+    <div id="comment-container">
+      <h1 id="comments">Comments</h1>
+      <form method="POST" action="/data">
+        <label for="numbers">Choose the number of Comments displayed</label>
+        <!-- onchange will change whenever there is a change in the value -->
+            <select name="num" id="num" onchange="loadUpdatedComments()">
+                <option value="1">1</option>
+                <option value="3">3</option>
+                <option value="5">5</option>
+                <option value="8">8</option>
+                <option value="10">10</option>
+                <option value="12">12</option>
+                <option value="14">14</option>
+            </select>
+      </form>
 
+      <form method="POST" action="/data">
+        <h3>Name:</h3>
+        <input type="text" name="name" placeholder="type your name">
+        <h3>Comment:</h3>
+        <input type="text" name="title" placeholder="type your comments">
+        <button>Submit</button>
+      </form>
+      <button id="delete-all" onclick="deleteAll()">Delete All</button>
+      <ul id="comment-list"></ul>
+    </div>
   </body>
 </html>

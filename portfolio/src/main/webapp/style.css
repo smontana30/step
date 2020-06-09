@@ -1,5 +1,48 @@
-* {
-    box-sizing: border-box;
+body, 
+html {
+    background-color: #c2bfb8;
+    font-family: 'Lato', sans-serif;
+    height: 100%;
+    margin: 0;
+    top: 0;
+}
+
+.comment {
+    
+    align-items: center;
+    background-color: white;
+    border: 1px solid black;
+    display: flex;
+    font-size: 16px;
+    justify-content: space-around;
+    padding: 5px;
+    width: auto; 
+}
+
+#comment-list {
+    list-style-type: none;
+}
+
+.comment h3 {
+    padding: 5px;
+}
+
+.comment button {
+    justify-content: flex-end; 
+    margin-left: auto;
+    padding: 5px;
+}
+
+#comment-container {
+    margin: 15px;
+}
+
+form input {
+    margin-bottom: 12px;
+}
+
+form {
+    margin-bottom: 16px;
 }
 
 nav {
@@ -10,8 +53,8 @@ nav {
     flex-direction: row;
     font-size: 24px;
     overflow: hidden;
-    position: sticky;
     text-align: center;
+    top: 0;
     width: 100%;
 }
 
@@ -19,8 +62,8 @@ nav span {
     align-content: flex-start;
     align-items: flex-start;
     align-self: flex-start;
-    padding: 14px 16px;
     color: white;
+    padding: 14px 16px;
 }
 
 nav a {
@@ -28,6 +71,7 @@ nav a {
     align-items: flex-end;
     align-self: flex-end;
     color: white;
+    justify-content: flex-end;
     padding: 14px 16px;
     text-decoration: none;
 }
@@ -38,7 +82,7 @@ nav a:hover {
 
 .header {
     background-attachment: fixed;
-    background-image: url('https://lp-cms-production.imgix.net/2019-06/512d769cd0d5e56c238eb975d2325940-japan.jpeg?fit=crop&q=40&sharp=10&vib=20&auto=format&ixlib=react-8.6.4');
+    background-image: url('https://live.staticflickr.com/5097/5439730380_2ddaecbfe2_b.jpg');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -68,15 +112,6 @@ nav a:hover {
     font-size: 20px;
 }
 
-body, 
-html {
-    background-color: #c2bfb8;
-    font-family: 'Lato', sans-serif;
-    height: 100%;
-    margin: 0;
-    top: 0;
-}
-
 #about-content {
     margin: 0;
     padding: 20px;
@@ -92,12 +127,19 @@ html {
 .row {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-around;
 }
 
 .row > .column {
     padding-left: 15px;
     padding-right: 15px;
     width: 50%;
+}
+
+.column {
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 15px;
 }
 
 .content {
@@ -125,9 +167,20 @@ img {
 .box {
     align-items: center;
     align-content: center;
-    display: flex;
     background-color: white;
+    display: block;
     height: 100px;
+    justify-content: center;
+    margin: 20px;
+    text-align: center;
+    width: 50%;
+   
+}
+
+.box button {
+    align-items: center;
+    justify-content: center;
+    margin: 20px; 
     text-align: center;
 }
 
@@ -136,18 +189,6 @@ footer {
     color: white;
     padding: 10px;
     text-align: center;
-}
-
-@media screen and (max-width: 900px) {
-    .column {
-        width: 50%;
-    }
-
-    img {
-        height: 300px;
-        object-fit: cover;
-        width: 300px;
-    }
 }
 
 @media screen and (max-width: 600px) {
