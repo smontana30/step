@@ -30,6 +30,44 @@ function loadComments() {
     });
 }
 
+
+function fetchBlobstoreUrlAndShowForm() {
+  fetch('/blobstore-upload-url')
+      .then((response) => {
+         return response.text();
+        // const messageArea = document.getElementById('comment-list');
+        // const liMessage = 
+      })
+      .then((imageUploadUrl) => {
+        // const messageForm = document.getElementById('my-form');
+        // messageForm.action = imageUploadUrl;
+        // messageForm.classList.remove('hidden');
+        // messageForm.style.remove('hidden');
+        const commentList = document.getElementById('comment-list');
+        commentList.appendChild(createImageElement(imageUploadUrl));
+      });
+    // fetch('/form-blob').then(response => response.json()).then((blobs) => {
+    //     const commentList = document.getElementById('comment-list');
+    //     blobs.forEach((blob) => { 
+    //         commentList.appendChild(createImageElement(blob));
+    //     });
+    // });
+
+}
+
+function createImageElement(imageUploadUrl) {
+    const liElement = document.createElement('li');
+
+    // const messageElement = document.createElement('span');
+    // messageElement.innerText = blob.message;
+
+    const imageElement = document.createElement('img');
+    imageElement.src = "imageUploadUrl";
+
+    liElement.appendChild(imageElement);
+    return liElement;
+}
+
 function createListElement(comment) {
     const commentElement = document.createElement('li');
     commentElement.className = 'comment';
@@ -75,6 +113,7 @@ function deleteAll() {
         comments[i].remove();
     }
 }
+
 
 // use the comments id to delete it
 function deleteComment(id) {

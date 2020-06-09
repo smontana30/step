@@ -2,8 +2,8 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Blobstore Fetch Example</title>
-    <script src="script.js"></script>
+    <title>Blobstore Fetch</title>
+    <script src="uploadscript.js"></script>
     <style>
       /* Form is hidden by default. */
       .hidden {
@@ -15,7 +15,7 @@
     <h1>Blobstore Fetch Example</h1>
     <p>Type a message and click submit:</p>
 
-    <form id="my-form" class="hidden" method="POST" enctype="multipart/form-data">
+    <form id="my-form" class="hidden" method="POST" enctype="multipart/form-data" action="/blobstore-upload">
       <p>Type some text:</p>
       <textarea name="message"></textarea>
       <br/>

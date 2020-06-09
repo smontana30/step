@@ -11,7 +11,7 @@
     <script src="script.js"></script>
   </head>
   <body>
-      <!-- <form method="POST" action="/login">
+      <form method="Get" action="/login">
         <h2 id="login-status">Not Logged in<h2>
         <p>
             <label for="email"> Email</label>
@@ -22,21 +22,6 @@
             <input name="action" type="submit" value="Log in" id="btn-login">
             <input name="action" type="submit" value="Log out" id="btn-logout">
         </p>
-    </form> -->
-
-    <form action="/login" method="post" enctype="mutipart/form-data">
-        <label for="myfile">Select a file:</label>
-        <input type="file" name="myfile">
-        <label for="text">Description</label>
-        <input type="text" name="text">
-        <input type="submit">
     </form>
-
-    <h3>Show a file-select field which allows multiple files:</h3>
-<form action="/login">
-  <label for="myfile">Select files:</label>
-  <input type="file" id="myfile" name="myfile" multiple><br><br>
-  <input type="submit">
-</form>
   </body>
 </html>

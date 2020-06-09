@@ -22,6 +22,14 @@ import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
 import com.google.appengine.api.images.ImagesService;
 import com.google.appengine.api.images.ImagesServiceFactory;
 import com.google.appengine.api.images.ServingUrlOptions;
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.MalformedURLException;
@@ -32,14 +40,56 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.google.gson.Gson;
+import java.util.ArrayList;
+import java.util.Arrays;
+import static java.util.Arrays.*;
+import java.util.List;
+
 
 /**
  * When the user submits the form, Blobstore processes the file upload and then forwards the request
  * to this servlet. This servlet can then process the request using the file URL we get from
  * Blobstore.
  */
-@WebServlet("/my-form-handler")
+final class BlobImg {
+    private final String message;
+    private final String image;
+    private final long timestamp;
+    private final long id;
+    
+    public BlobImg(String message, String image, long timestamp, long id) {
+        this.message = message;
+        this.image = image;
+        this.timestamp = timestamp;
+        this.id = id;
+    }
+}
+
+@WebServlet("/form-blob")
 public class BlobFormHandlerServlet extends HttpServlet {
+
+//   @Override
+//   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+//     Query query = new Query("Message").addSort("timestamp", SortDirection.DESCENDING);
+//     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+//     PreparedQuery results = datastore.prepare(query);
+//     List<BlobImg> blob = new ArrayList<>();
+//     for (Entity entity : results.asIterable()) {
+//       long id = entity.getKey().getId();
+//       String message = (String) entity.getProperty("message");
+//       long timestamp = (long) entity.getProperty("timestamp");
+//       String image = (String) entity.getProperty("image");
+
+//       BlobImg user = new BlobImg(message, image, timestamp, id);
+//       blob.add(user);
+//     }
+
+//     Gson gson = new Gson();
+
+//     response.setContentType("application/json;");
+//     response.getWriter().println(gson.toJson(blob));
+//   }  
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -49,6 +99,17 @@ public class BlobFormHandlerServlet extends HttpServlet {
 
     // Get the URL of the image that the user uploaded to Blobstore.
     String imageUrl = getUploadedFileUrl(request, "image");
+
+    // long timestamp = System.currentTimeMillis();
+
+    // DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    // Entity messageEntity = new Entity("Message");
+
+    // messageEntity.setProperty("message", message);
+    // messageEntity.setProperty("image", imageUrl);
+    // messageEntity.setProperty("timestamp", timestamp);
+
+    // datastore.put(messageEntity);
 
     // Output some HTML that shows the data the user entered.
     // A real codebase would probably store these in Datastore.
