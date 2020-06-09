@@ -21,6 +21,8 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -44,6 +46,7 @@ final class Task {
     this.title = title;
     this.timestamp = timestamp;
     this.name = name;
+
   }
 }
 
@@ -53,6 +56,7 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
     Query query = new Query("Task").addSort("timestamp", SortDirection.DESCENDING);
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
@@ -63,7 +67,7 @@ public class DataServlet extends HttpServlet {
       long timestamp = (long) entity.getProperty("timestamp");
       String name = (String) entity.getProperty("name");
 
-      Task user = new Task(id, title, timestamp,name);
+      Task user = new Task(id, title, timestamp, name);
       comments.add(user);
       
     }
@@ -71,24 +75,27 @@ public class DataServlet extends HttpServlet {
 
     response.setContentType("application/json;");
     response.getWriter().println(gson.toJson(comments));
+    response.sendRedirect("/index.html");
   }
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
       String title = request.getParameter("title");
       String name = request.getParameter("name");
-      if (name == "") {
+      if (name == "" || name == " ") {
           name = "Unknown";
       }
-      long timestamp = System.currentTimeMillis();
+      DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
       Entity taskEntity = new Entity("Task");
+      long timestamp = System.currentTimeMillis();
+      
       taskEntity.setProperty("title", title);
       taskEntity.setProperty("name", name);
       taskEntity.setProperty("timestamp", timestamp);
 
-      DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+      
       datastore.put(taskEntity);
 
-      response.sendRedirect("/index.html");
+      response.sendRedirect("/data");
   }
 }
