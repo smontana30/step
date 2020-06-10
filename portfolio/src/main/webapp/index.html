@@ -19,7 +19,7 @@
         <a href="#comments">Comments</a>
         <a href="/login">Login</a>
         <a href="uploadBlob.html">Image Upload</a>
-        <!-- <a href="maps.html">Map</a> -->
+        <a href="maps.html">Map</a>
     </nav>
 
     <div class="header"> 
@@ -114,6 +114,7 @@
         </button>
     </div>
 
+
     <div id="comment-container">
       <h1 id="comments">Comments</h1>
       <form method="POST" action="/data">
@@ -138,11 +139,11 @@
         <button>Submit</button>
       </form>
 
-      <form action="/form-blob" id="my-form" class="hidden" method="POST" enctype="multipart/form-data">
+      <!-- <form action="/form-blob" id="my-form" class="hidden" method="POST" enctype="multipart/form-data">
         <label for="myfile">Select a file:</label>
         <input type="file" id="myfile" name="myfile"><br><br>
         <input type="submit">
-      </form>
+      </form> -->
 
       <button id="delete-all" onclick="deleteAll()">Delete All</button>
       <ul id="comment-list"></ul>

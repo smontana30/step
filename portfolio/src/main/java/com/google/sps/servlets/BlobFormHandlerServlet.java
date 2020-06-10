@@ -69,28 +69,6 @@ final class BlobImg {
 @WebServlet("/form-blob")
 public class BlobFormHandlerServlet extends HttpServlet {
 
-//   @Override
-//   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-//     Query query = new Query("Message").addSort("timestamp", SortDirection.DESCENDING);
-//     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-//     PreparedQuery results = datastore.prepare(query);
-//     List<BlobImg> blob = new ArrayList<>();
-//     for (Entity entity : results.asIterable()) {
-//       long id = entity.getKey().getId();
-//       String message = (String) entity.getProperty("message");
-//       long timestamp = (long) entity.getProperty("timestamp");
-//       String image = (String) entity.getProperty("image");
-
-//       BlobImg user = new BlobImg(message, image, timestamp, id);
-//       blob.add(user);
-//     }
-
-//     Gson gson = new Gson();
-
-//     response.setContentType("application/json;");
-//     response.getWriter().println(gson.toJson(blob));
-//   }  
-
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
@@ -99,17 +77,6 @@ public class BlobFormHandlerServlet extends HttpServlet {
 
     // Get the URL of the image that the user uploaded to Blobstore.
     String imageUrl = getUploadedFileUrl(request, "image");
-
-    // long timestamp = System.currentTimeMillis();
-
-    // DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-    // Entity messageEntity = new Entity("Message");
-
-    // messageEntity.setProperty("message", message);
-    // messageEntity.setProperty("image", imageUrl);
-    // messageEntity.setProperty("timestamp", timestamp);
-
-    // datastore.put(messageEntity);
 
     // Output some HTML that shows the data the user entered.
     // A real codebase would probably store these in Datastore.
