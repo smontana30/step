@@ -80,13 +80,13 @@ public class BlobFormHandlerServlet extends HttpServlet {
 
     // Output some HTML that shows the data the user entered.
     // A real codebase would probably store these in Datastore.
-    PrintWriter out = response.getWriter();
-    out.println("<p>Here's the image you uploaded:</p>");
-    out.println("<a href=\"" + imageUrl + "\">");
-    out.println("<img src=\"" + imageUrl + "\" />");
-    out.println("</a>");
-    out.println("<p>Here's the text you entered:</p>");
-    out.println(message);
+    // PrintWriter out = response.getWriter();
+    // out.println("<p>Here's the image you uploaded:</p>");
+    // out.println("<a href=\"" + imageUrl + "\">");
+    // out.println("<img src=\"" + imageUrl + "\" />");
+    // out.println("</a>");
+    // out.println("<p>Here's the text you entered:</p>");
+    // out.println(message);
   }
 
   /** Returns a URL that points to the uploaded file, or null if the user didn't upload a file. */

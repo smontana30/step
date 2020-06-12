@@ -30,20 +30,48 @@ function loadComments() {
     });
 }
 
+
+function fetchBlobstoreUrlAndShowForm() {
+  fetch('/blobstore-upload')
+      .then((response) => response.text())
+      .then((imageUploadUrl) => {
+        // const messageForm = document.getElementById('my-form');
+        // messageForm.action = imageUploadUrl;
+        // messageForm.classList.remove('hidden');
+        const comment = document.getElementById('comment-list');
+        
+      });
+}
+
+
+function createImageElement(imageUploadUrl) {
+    const liElement = document.createElement('li');
+
+    const imgElement = document.createElement('img');
+    imgElement.src = imageUploadUrl;
+
+    const messageElement = document.createElement('span');
+    messageElement.innerText = imageUploadUrl.message;
+
+    liElement.appendChild(imgElement);
+    liElement.appendChild(messageElement);
+    return commentElement;
+}
+
 function createMap() {
   
   const map = new google.maps.Map(
       document.getElementById('map'),
-      {center: {lat: 37.422, lng: -122.084}, zoom: 16});
+      {center: {lat:  25.784, lng: -80.2267}, zoom: 16});
 
   const trexMarker = new google.maps.Marker({
-    position: {lat: 37.421903, lng: -122.084674},
+    position: {lat: 25.803979, lng: -80.199256},
     map: map,
-    title: 'Stan the T-Rex'
+    title: 'Wynwood'
   });
 
   const trexInfoWindow =
-      new google.maps.InfoWindow({content: 'This is Stan, the T-Rex statue.'});
+      new google.maps.InfoWindow({content: 'This is Wynwood one of Miami hottest art district.'});
   trexInfoWindow.open(map, trexMarker);
 }
 
