@@ -94,6 +94,6 @@ public class DataServlet extends HttpServlet {
       
       datastore.put(taskEntity);
 
-       response.sendRedirect("/index.html");
+      response.sendRedirect("/index.html");
   }
 }

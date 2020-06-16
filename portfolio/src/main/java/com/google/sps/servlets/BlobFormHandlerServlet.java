@@ -51,7 +51,6 @@ public class BlobFormHandlerServlet extends HttpServlet {
  
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
- 
     // Get the message entered by the user.
     String message = request.getParameter("message");
  

@@ -37,7 +37,6 @@ function loadComments() {
     });
 }
  
- 
 function fetchBlobstoreUrlAndShowForm() {
   fetch('/blobstore-upload')
       .then((response) => response.text())
@@ -45,8 +44,7 @@ function fetchBlobstoreUrlAndShowForm() {
         const messageForm = document.getElementById('my-form');
         messageForm.action = imageUploadUrl;
       });
-}
- 
+} 
  
 function createImageElement(imageUploadUrl) {
     const liElement = document.createElement('li');
@@ -78,7 +76,6 @@ function createMap() {
       new google.maps.InfoWindow({content: 'This is Wynwood one of Miami hottest art district.'});
   trexInfoWindow.open(map, trexMarker);
 }
- 
  
 function createListElement(comment) {
     const commentElement = document.createElement('li');
@@ -125,7 +122,6 @@ function deleteAll() {
         comments[i].remove();
     }
 }
- 
  
 // use the comments id to delete it
 function deleteComment(id) {

@@ -1,12 +1,12 @@
 
 function fetchBlobstoreUrlAndShowForm() {
   fetch('/blobstore-upload')
-      .then((response) => {
+    .then((response) => {
         return response.text();
-      })
-      .then((imageUploadUrl) => {
+    })
+    .then((imageUploadUrl) => {
         const messageForm = document.getElementById('my-form');
         messageForm.action = imageUploadUrl;
         messageForm.classList.remove('hidden');
-      });
+    });
 }
