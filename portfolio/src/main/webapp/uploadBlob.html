@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Blobstore Fetch</title>
+    <script src="uploadscript.js"></script>
+    <link rel="stylesheet" href="blobstyle.css">
+  </head>
+  <body onload="fetchBlobstoreUrlAndShowForm()">
+    <h1>Blobstore Fetch Example</h1>
+    <p>Type a message and click submit:</p>
+
+    <form id="my-form" class="hidden" method="POST" enctype="multipart/form-data" >
+      <p>Type some text:</p>
+      <textarea name="message"></textarea>
+
+      <p>Upload an image:</p>
+      <input type="file" name="image">
+
+      <button>Submit</button>
+    </form>
+  </body>
+</html>

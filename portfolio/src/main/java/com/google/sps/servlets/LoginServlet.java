@@ -27,24 +27,25 @@ import java.io.PrintWriter;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
-
+ 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("text/html");
     PrintWriter out = response.getWriter();
     out.println("<h1>Login</h1>");
     UserService userService = UserServiceFactory.getUserService();
-    System.out.println("user logged in: " + userService.isUserLoggedIn());
     if (!userService.isUserLoggedIn()) {
         String loginUrl = userService.createLoginURL("/index.html#comment-container");
-        response.sendRedirect(loginUrl);
+        response.getWriter().println("<p>Hello stranger.</p>");
+        response.getWriter().println("<p>Login <a href=\"" + loginUrl + "\">here</a>.</p>");        
         return;
     }
     String userEmail = userService.getCurrentUser().getEmail();
     response.getWriter().println("<p>Hello " + userEmail + "!</p>");
     String logoutUrl = userService.createLogoutURL("/index.html#comment-container");
-    response.setContentType("text/html");
-    response.getWriter().println(userEmail);
-    response.sendRedirect(logoutUrl);
+    response.getWriter().println("<p>Logout <a href=\"" + logoutUrl + "\">here</a>.</p>");
+    
+    
   }
 }
+ 

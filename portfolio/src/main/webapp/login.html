@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>My Portfolio</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital@1&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+  </head>
+  <body>
+      <form method="Get" action="/login">
+        <h2 id="login-status">Not Logged in<h2>
+        <p>
+            <label for="email"> Email</label>
+            <input type="text" name="email" id="email" value="test@example.com">
+        </p>
+        <input type="hidden" name="continue" value="/login">
+        <p>
+            <input name="action" type="submit" value="Log in" id="btn-login">
+            <input name="action" type="submit" value="Log out" id="btn-logout">
+        </p>
+    </form>
+  </body>
+</html>

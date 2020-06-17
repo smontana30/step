@@ -4,28 +4,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <title>My Portfolio</title>
-
+ 
     <link href="https://fonts.googleapis.com/css2?family=Lato:ital@1&display=swap" rel="stylesheet">
-    
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwcRTXYZaM4tOayy4Jvw5h79sU-Gdh2_0"></script>
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
   </head>
-  <body onload="loadComments()">
+  <body onload="initialize()">
     <nav> 
         <span>Navbar</span>
         <a href="#about-content">About</a>
         <a href="#gallery">Gallery</a>
         <a href="#box">Color Picker</a>
         <a href="#comments">Comments</a>
-        <a href="login.html">Login</a>
+        <a href="/login">Login</a>
+        <a href="uploadBlob.html">Image Upload</a>
+        <a href="maps.html">Map</a>
     </nav>
-
+ 
     <div class="header"> 
         <div class="header-text"> 
             <h1>Sofia Montana</h1>
         </div>
     </div>
-
+ 
     <div id="about-content"> 
         <h2>About Me... </h2>
         <p> 
@@ -37,7 +39,7 @@
             nerd I love Math and have a job tutoring students in Math at my university.
         </p>
     </div>
-
+ 
     <!-- place the cool image hover effect of each (for each) -->
     <div id="gallery">
         <h2> Fun Fact Gallery </h2>
@@ -58,7 +60,7 @@
                     </p>
                 </div>
             </div>
-
+ 
             <!-- image about twins talk being a twin -->
             <div class="column"> 
                 <div class="content"> 
@@ -71,7 +73,7 @@
                     </p>
                 </div>
             </div>
-
+ 
             <!-- image on bad bunny my fav artist  -->
             <div class="column"> 
                 <div class="content"> 
@@ -87,7 +89,7 @@
                     </p>
                 </div>
             </div>
-
+ 
             <div class="column"> 
                 <div class="content"> 
                     <img src="https://static.iris.net.co/semana/upload/images/2018/6/1/569673_1.jpg" 
@@ -111,7 +113,9 @@
            Click To Change Color 
         </button>
     </div>
-
+ 
+    <div id="map"></div>
+ 
     <div id="comment-container">
       <h1 id="comments">Comments</h1>
       <form method="POST" action="/data">
@@ -127,7 +131,7 @@
                 <option value="14">14</option>
             </select>
       </form>
-
+ 
       <form method="POST" action="/data">
         <h3>Name:</h3>
         <input type="text" name="name" placeholder="type your name">
@@ -135,6 +139,14 @@
         <input type="text" name="title" placeholder="type your comments">
         <button>Submit</button>
       </form>
+ 
+      <form id="my-form" method="POST" enctype="multipart/form-data">
+        <textarea name="message"></textarea>
+        <label for="myfile">Select a file:</label>
+        <input type="file" id="myfile" name="image"><br><br>
+        <input type="submit">
+      </form>
+ 
       <button id="delete-all" onclick="deleteAll()">Delete All</button>
       <ul id="comment-list"></ul>
     </div>

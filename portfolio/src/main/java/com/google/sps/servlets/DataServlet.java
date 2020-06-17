@@ -14,7 +14,6 @@
 
 package com.google.sps.servlets;
 
-import com.google.sps.data.UserInfo;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
@@ -75,7 +74,6 @@ public class DataServlet extends HttpServlet {
 
     response.setContentType("application/json;");
     response.getWriter().println(gson.toJson(comments));
-    response.sendRedirect("/index.html");
   }
 
   @Override
@@ -96,6 +94,6 @@ public class DataServlet extends HttpServlet {
       
       datastore.put(taskEntity);
 
-      response.sendRedirect("/data");
+      response.sendRedirect("/index.html");
   }
 }

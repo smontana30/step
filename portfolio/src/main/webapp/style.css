@@ -33,6 +33,14 @@ html {
     padding: 5px;
 }
 
+#map {
+  border: thin solid black;
+  height: 500px;
+  width: 500px;
+  margin: 15px;
+}
+
+
 #comment-container {
     margin: 15px;
 }
