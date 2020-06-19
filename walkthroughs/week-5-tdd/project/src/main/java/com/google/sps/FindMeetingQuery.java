@@ -25,21 +25,22 @@ import java.util.Iterator;
 public final class FindMeetingQuery {
 
     public List<TimeRange> findRange( ArrayList timeRangesArray, MeetingRequest request, Collection<Event> event){
-        // going to find end time and export arraylist with start and end time
         int duration = (int)request.getDuration();
-        System.out.println("in the findRange method()");
         List<TimeRange> rangezz = new ArrayList<TimeRange>();
         int timeRange = 0;
         int timePlus = 0;
         for(int i = 0; i < timeRangesArray.size(); i++) {
             timeRange = (int)timeRangesArray.get(i);
-            if (i == 0) {   
+            // if there are duplicates remove those instances 
+            if (i == 0) {  
+                // skip if curr time = Start of Day (0)
                 if (timeRange == TimeRange.START_OF_DAY) {
                     continue;
                 }
                 rangezz.add(TimeRange.fromStartEnd(TimeRange.START_OF_DAY, timeRange, false));
             }
             else if (i == (timeRangesArray.size() - 1)) {
+                // skip if curr time = End of Day (1440)
                 if (timeRange == (TimeRange.END_OF_DAY + 1)) {
                     break;
                 }
@@ -47,10 +48,15 @@ public final class FindMeetingQuery {
             }
             else {
                 timePlus = (int)timeRangesArray.get(++i);
+                // checks for duplicate times if we have duplicates just skip
+                if (timeRange == timePlus) {
+                    continue;
+                }
                 rangezz.add(TimeRange.fromStartEnd(timeRange, timePlus, false));                
             }
         }
         for(int i = 0; i < rangezz.size(); i++) {
+            // checks to see if there if enough room in the day for each meeting if not remove it
             if (rangezz.get(i).duration() < request.getDuration()) {
                 rangezz.remove(i);
             }
@@ -67,48 +73,24 @@ public final class FindMeetingQuery {
         }
         int eventCount = 0;
         List<TimeRange> avaiablity = new ArrayList<TimeRange>();
-        ArrayList<Integer> eventTimes = new ArrayList<Integer>();
         ArrayList<Integer>  startEndTimes = new ArrayList<Integer>();
-        Collection<String> eventAttendees = events.getAttendees();
-        Collection<String> requestAttendees = request.getAttendees();
         int start = 0;
         int end = 0;
         int startTimePrev = 0;
         int endTimePrev = 0;
         int index = 0;
-        for (Event e : events) {
-            System.out.println(e.getWhen().toString() + " current index is " + index);
-            // first do comparison
-            // may need to export eventmeetings.get.start to int variable might cause some type errors in java
-            // overlap test
-            // start = 0 or end = 1440(end of day) just don't add to array skip them
+        for (Event e : events) {            
             start= e.getWhen().start();
             end  = e.getWhen().end();
-            System.out.println("start = " + start + " startPrev = " + startTimePrev);
-            System.out.println("end = " + end + " endPrev = " + endTimePrev);
-            if ((e.getAttendees().contains(request.getOptionalAttendees()))) {
-                // don't add at event to starttimeEnd time array
-                
-                startTimePrev = start;
-                endTimePrev = end;
-                continue;
-            }
-            // if (e.getAttendees().contains(request.getAttendees())) {
-                System.out.println("attendee for event is here");
-                if (e.getWhen().start() < endTimePrev) {
+            if (e.getAttendees().stream().anyMatch(request.getAttendees()::contains)) {
+                if (e.getWhen().start() < endTimePrev && e.getWhen().start() > startTimePrev) {
                     if (e.getWhen().end() > endTimePrev) {
-                        // if passes both test there is definity an overlap then push starttime for 1 and end time for 2 to get correct meeting times
-                        System.out.println("Overlap");
-                        // iteration val already in so check for one we want to delete and if inside delete and add end time 
+                        
                         if (startEndTimes.contains(endTimePrev)) {
                             startEndTimes.set(index, end);
                         }
                     }
                     else if (endTimePrev > e.getWhen().end()) {
-                        // nested test
-                        // if true just push prev start and end
-                        System.out.println("Nested Overlap");
-                        // if nest just don't add new end adn start to array
                         index += 1;
                         startTimePrev = start;
                         endTimePrev = end;
@@ -116,19 +98,46 @@ public final class FindMeetingQuery {
                     }
                 }
                 else {
-                    // if start = Start_Of_Day just add end tiem of that sequence 
                     startEndTimes.add(start);
                     startEndTimes.add(end);
                 }
-            // }
+                
+            }
+            // same functionally for optional attendees
+            if (e.getAttendees().stream().anyMatch(request.getOptionalAttendees()::contains)) {
+                if (e.getWhen().equals(TimeRange.WHOLE_DAY)) {
+                    // if optional user has all day event just skip them
+                    index += 1;
+                    startTimePrev = start;
+                    endTimePrev = end;
+                    continue;
+                }
+                if (e.getWhen().start() < endTimePrev && e.getWhen().start() > startTimePrev) {
+                    if (e.getWhen().end() > endTimePrev) {
+                        // if passes both test there is definity an overlap then push starttime for 1 and end time for 2 to get correct meeting times
+                        if (startEndTimes.contains(endTimePrev)) {
+                            startEndTimes.set(index, end);
+                        }
+                    }
+                    else if (endTimePrev > e.getWhen().end()) {
+                        // nested overlap do nothing update Prevs and index
+                        index += 1;
+                        startTimePrev = start;
+                        endTimePrev = end;
+                        continue;
+                    }
+                }
+                else {
+                    // no weird overlap or nesting case happened so add as normal
+                    startEndTimes.add(start);
+                    startEndTimes.add(end);
+                }
+            }
             index += 1;
             startTimePrev = start;
             endTimePrev = end;
         }
-        for (int i = 0; i < startEndTimes.size(); i++) {
-            System.out.println("index = " + i);
-            System.out.println("time is " + startEndTimes.get(i));
-        }
+        Collections.sort(startEndTimes);
         if (startEndTimes.isEmpty()) {
             return Arrays.asList(TimeRange.WHOLE_DAY);
         }
