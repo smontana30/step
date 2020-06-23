@@ -26,7 +26,7 @@ public final class FindMeetingQuery {
 
     public List<TimeRange> findRange( ArrayList timeRangesArray, MeetingRequest request, Collection<Event> event){
         int duration = (int)request.getDuration();
-        List<TimeRange> rangezz = new ArrayList<TimeRange>();
+        List<TimeRange> ranges = new ArrayList<TimeRange>();
         int timeRange = 0;
         int timePlus = 0;
         for(int i = 0; i < timeRangesArray.size(); i++) {
@@ -37,14 +37,14 @@ public final class FindMeetingQuery {
                 if (timeRange == TimeRange.START_OF_DAY) {
                     continue;
                 }
-                rangezz.add(TimeRange.fromStartEnd(TimeRange.START_OF_DAY, timeRange, false));
+                ranges.add(TimeRange.fromStartEnd(TimeRange.START_OF_DAY, timeRange, false));
             }
             else if (i == (timeRangesArray.size() - 1)) {
                 // skip if curr time = End of Day (1440)
                 if (timeRange == (TimeRange.END_OF_DAY + 1)) {
                     break;
                 }
-                rangezz.add(TimeRange.fromStartEnd(timeRange, TimeRange.END_OF_DAY, true));
+                ranges.add(TimeRange.fromStartEnd(timeRange, TimeRange.END_OF_DAY, true));
             }
             else {
                 timePlus = (int)timeRangesArray.get(++i);
@@ -52,16 +52,16 @@ public final class FindMeetingQuery {
                 if (timeRange == timePlus) {
                     continue;
                 }
-                rangezz.add(TimeRange.fromStartEnd(timeRange, timePlus, false));                
+                ranges.add(TimeRange.fromStartEnd(timeRange, timePlus, false));                
             }
         }
-        for(int i = 0; i < rangezz.size(); i++) {
+        for(int i = 0; i < ranges.size(); i++) {
             // checks to see if there if enough room in the day for each meeting if not remove it
-            if (rangezz.get(i).duration() < request.getDuration()) {
-                rangezz.remove(i);
+            if (ranges.get(i).duration() < request.getDuration()) {
+                ranges.remove(i);
             }
         }
-        return rangezz;
+        return ranges;
     }
 
     public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
@@ -79,18 +79,18 @@ public final class FindMeetingQuery {
         int startTimePrev = 0;
         int endTimePrev = 0;
         int index = 0;
-        for (Event e : events) {            
-            start= e.getWhen().start();
-            end  = e.getWhen().end();
-            if (e.getAttendees().stream().anyMatch(request.getAttendees()::contains)) {
-                if (e.getWhen().start() < endTimePrev && e.getWhen().start() > startTimePrev) {
-                    if (e.getWhen().end() > endTimePrev) {
+        for (Event event : events) {            
+            start= event.getWhen().start();
+            end  = event.getWhen().end();
+            if (event.getAttendees().stream().anyMatch(request.getAttendees()::contains)) {
+                if (event.getWhen().start() < endTimePrev && event.getWhen().start() > startTimePrev) {
+                    if (event.getWhen().end() > endTimePrev) {
                         
                         if (startEndTimes.contains(endTimePrev)) {
                             startEndTimes.set(index, end);
                         }
                     }
-                    else if (endTimePrev > e.getWhen().end()) {
+                    else if (endTimePrev > event.getWhen().end()) {
                         index += 1;
                         startTimePrev = start;
                         endTimePrev = end;
@@ -104,22 +104,22 @@ public final class FindMeetingQuery {
                 
             }
             // same functionally for optional attendees
-            if (e.getAttendees().stream().anyMatch(request.getOptionalAttendees()::contains)) {
-                if (e.getWhen().equals(TimeRange.WHOLE_DAY)) {
+            if (event.getAttendees().stream().anyMatch(request.getOptionalAttendees()::contains)) {
+                if (event.getWhen().equals(TimeRange.WHOLE_DAY)) {
                     // if optional user has all day event just skip them
                     index += 1;
                     startTimePrev = start;
                     endTimePrev = end;
                     continue;
                 }
-                if (e.getWhen().start() < endTimePrev && e.getWhen().start() > startTimePrev) {
-                    if (e.getWhen().end() > endTimePrev) {
+                if (event.getWhen().start() < endTimePrev && event.getWhen().start() > startTimePrev) {
+                    if (event.getWhen().end() > endTimePrev) {
                         // if passes both test there is definity an overlap then push starttime for 1 and end time for 2 to get correct meeting times
                         if (startEndTimes.contains(endTimePrev)) {
                             startEndTimes.set(index, end);
                         }
                     }
-                    else if (endTimePrev > e.getWhen().end()) {
+                    else if (endTimePrev > event.getWhen().end()) {
                         // nested overlap do nothing update Prevs and index
                         index += 1;
                         startTimePrev = start;

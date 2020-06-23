@@ -54,7 +54,6 @@ public final class MeetingRequest {
    */
   public void addOptionalAttendee(String attendee) {
     if (!attendees.contains(attendee)) {
-        System.out.println("attendee added");
       optional_attendees.add(attendee);
     }
   }
