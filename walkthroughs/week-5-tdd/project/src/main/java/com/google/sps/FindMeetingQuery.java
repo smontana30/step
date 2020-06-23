@@ -66,8 +66,8 @@ public final class FindMeetingQuery {
 
     public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
         if (request.getDuration() > TimeRange.WHOLE_DAY.duration()) {
-                return Arrays.asList();
-            }
+            return Arrays.asList();
+        }
         if (events.isEmpty()) {
             return Arrays.asList(TimeRange.WHOLE_DAY);
         }
